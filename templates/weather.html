@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    h1, body {
+        font-family: "Karma", sans-serif
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+}
+img {
+  width: 100%; 
+}
+th,td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+</style>
+</head>
+
+<h1>Hello, {{word}}!</h1>
+Today's weekly weather forecast are...
+
+<body>
+
+<table style="width:80%">
+    <tbody>
+    <tr>
+        <th width="10%" >Time</th>
+        <th width="20%" >Comment</th>
+        <th width="20%" >Precipitation</th>
+        <th width="5%" >Humidity</th>
+        <th width="5%" >UV Index</th>
+        <th width="40%" >Daily summary</th>
+
+    </tr>
+
+    {% for t in range(8) %}
+    <tr>
+        <td width="10%">{{word_list['wk_time'][t]}}</a></td>
+        <td width="20%">{{word_list['comment'][t]}}</a></td>
+        <td width="20%">{{word_list['precipitation_prob'][t]}}</a></td>
+        <td width="5%">{{word_list['humid'][t]}}</a></td>
+        <td width="5%">{{word_list['uv_index'][t]}}</a></td>
+        <td width="40%">{{word_list['daily_sum'][t]}}</a></td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+
+
