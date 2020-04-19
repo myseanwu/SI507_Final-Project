@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Hotel: Results</title>
+</head>
+<body>
+    <h1>Here are your results!</h1>
+    <table>
+        <tr>
+            <th>Hotel Name</th>
+            <th>score</th>
+            <th>comment</th>
+            <th>review counts</th>
+
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Here is your graph!</h1>
+    {{plot_div | safe}}
+
+    {% if topic %}
+    <h2>Today's {{sort}} Topics of {{title}} in Reddit are...</h2>
+        
+        <ol>
+            {% for t in topic %}
+            <li>{{ t[0] }}</li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+        
+
+
+</body>
+</html>

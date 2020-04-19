@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Hotel list</title>
+</head>
+<body>
+    <h1>Some hotel recomendation!</h1>
+    <form action='/results' method='POST'>
+
+    <p>
+        Select a region?
+        <select name="region">
+            <option value="Europe">Europe</option>
+            <option value="North America">North America</option>
+            <option value="Central America">Central America</option>
+            <option value="South America">South America</option>
+            <option value="Asia">Asia</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Europe">Caribbean</option>
+            <option value="Europe">Middle East</option>
+            <option value="Europe">Africa</option>
+        </select>
+    </p>
+
+    <p>
+        What is the country you want to search? <input name="country_name" type="text"/><br/><br/><br/>
+        What is the city you want to search? <input name="city_name" type="text"/><br/><br/><br/>
+    </p>
+    <!-- <p>
+    Sort by: <br/>
+        <input type='radio' name='sort' 
+                value='score' checked='checked'/> Score <br/>
+        <input type='radio' name='sort' 
+                value='review_num'/> Review number <br/><br/><br/>
+    </p> -->
+
+    <p>
+        <input type="checkbox" name="plot"> Plot results? <br/><br/><br/>
+    </p>
+
+    <p>
+        <input type="checkbox" name="reddit"> Read Reddit Topics? <br/>
+    </p>
+    <ul><li>
+        How many topics do you want to read? <br/>
+            <input type='radio' name='reddit_sort'
+                value='top' checked='checked'/>Top 5<br/>
+            <input type='radio' name='reddit_sort'
+                value='new'/>Latest 5<br/>
+            <input type='radio' name='reddit_sort'
+                value='hot'/>hot 5<br/>
+        </li>
+            </ul>
+
+    <input type='submit' value='Get Results'/>
+    </form>
+</body>
+</html>

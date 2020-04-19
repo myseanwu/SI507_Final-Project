@@ -137,13 +137,13 @@ def weather_data(place): # add language option?!
     # print(data)
     return Weather(data)
 
-p = 'Ann Arobr'
-aa = weather_data(p)
-tp = weather_data('taipei') # 最好用地址
-# print(tp.timezone)
-print(aa.daily_sum)
+# p = 'Ann Arobr'
+# aa = weather_data(p)
+# tp = weather_data('taipei') # 最好用地址
+# # print(tp.timezone)
+# print(aa.daily_sum)
 
-tp.plot_temp()
+# tp.plot_temp()
 # # print(tp.total)
 # print(location_check(p))
 
@@ -162,5 +162,5 @@ def find_headlines(nm): # weather table
 
 
 
-# if __name__ == '__main__':  
-#     app.run(debug=True)
+if __name__ == '__main__':  
+    app.run(debug=True)

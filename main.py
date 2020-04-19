@@ -8,12 +8,15 @@ import json
 import re
 import secrets
 import darksky_api
+from flask import Flask, render_template,request
+import plotly.graph_objects as go
 
 # reference: https://praw.readthedocs.io/en/latest/getting_started/quick_start.html
 # reference: https://www.storybench.org/how-to-scrape-reddit-with-python/
 # reference: https://www.reddit.com/dev/api#GET_search 
 # https://github.com/reddit-archive/reddit/wiki/oauth2
 
+app = Flask(__name__)
 
 personal_use_script = secrets.personal_use_script
 secret = secrets.secret
@@ -30,18 +33,19 @@ reddit = praw.Reddit(client_id= personal_use_script , \
 CACHE_FILE_NAME = 'cache.json'  ## cache
 CACHE_DICT = {}  ## cache
 
-def reddit_topics(topic,num):
+def reddit_topics(topic,num,sorting='top'):
     subreddit = reddit.subreddit('travel')
  
     # print(f'Topics for {topic}:')
-    search = subreddit.search(topic, limit = num, sort='top', )  #sort= 'top', 'hot','new','comment (default)'
+    search = subreddit.search(topic, limit = num, sort=sorting )  #sort= 'top', 'hot','new','comment (default)'
     result = {}
     i=1
     for x in search:
         num = f'[{i}]'
         topic = x.title.strip('\n')   #, '\n', x.url)
+        pic = x.url
         i = i + 1
-        result[num] = topic
+        result[num] = (topic,pic)
     return result
 
 
@@ -621,13 +625,58 @@ def construct_unique_key(baseurl, params):  ## if url cannot be the keys, reserv
     unique_key = baseurl + connector +  connector.join(param_strings)
     return unique_key
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+@app.route('/results', methods=['POST'])
+def results():
+    selected_region = request.form['region']
+    selected_country = request.form['country_name']
+    selected_city = request.form['city_name']
+
+    info = list_city_url(selected_region,selected_country,selected_city) # city url from sql
+    try:
+        city_url = info[3] # retreive browse url
+        browse_url = go_to_hotels_browse(city_url)  # return browse url
+
+        # check browser_url, if there is a 'https://', then go to the url
+        pattern = r'(http.*.html)'
+        search = re.match(pattern,browse_url)
+        if search:
+            results = hotel_info_from_browse_list(browse_url) 
+            # return list of hotel_name, score, comment_title, review_num, url
+    except:
+        results = [('N/A','N/A','N/A','N/A','N/A')]
+
+    # plot
+    plot_results = request.form.get('plot', False)
+    if (plot_results):
+        x_vals = [x[0] for x in results] #hotel name
+        y_vals = [x[1] for x in results] # review_num
+        bars_data = go.Bar(
+            x=x_vals,
+            y=y_vals
+        )
+        fig = go.Figure(data=bars_data)
+        fig.update_layout(  title="Hotels vs Scores",
+                            xaxis_title="Hotel",
+                            yaxis_title="Score")
+        div = fig.to_html(full_html=False)
+
+        return render_template('results.html', 
+        results=results, region=selected_region,plot_div=div)
+    else:
+
+        return render_template('results.html', 
+        results=results, region=selected_region)
 
 
 if __name__=="__main__":
     CACHE_DICT = load_cache()
 
     check_tables_sql()
+
     select_city = hotel_interactive()
     country = select_city[0]
     city = select_city[1]
@@ -654,5 +703,4 @@ if __name__=="__main__":
     # num = 3
     # reddit_topics(topic,num)
 
-  
-   
+
