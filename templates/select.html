@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Country</title>
+</head>
+<style>
+    h1, body {
+        font-family: "Karma", sans-serif
+    }
+    </style>
+<body>
+    <h1>Select area and Country!</h1>
+    <form action='/country' method='POST'>
+
+    <p>
+        Filter by region?
+        <select name="region">
+            {% for r in region %}
+            <ul>
+                <option value='{{r}}'>{{r}}</option>
+            </ul>
+            {% endfor %}
+
+        </select>
+    </p>
+
+
+    <input type='submit' value='Get Country'/>
+    </form>
+
+
+
+</body>
+</html>

@@ -5,9 +5,32 @@
     <meta charset="UTF8"/>
     <title>Hotel: Results</title>
 </head>
+<style>
+    h1, body {
+        font-family: "Karma", sans-serif
+    }
+    table#t01, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    img {
+        width: 100%; 
+    }
+    th,td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+
+</style>
+
 <body>
-    <h1>Here are your results!</h1>
-    <table>
+    <h1>Here are your results in <b>{{city}}</b>!</h1>
+    
+    <table width=60%>
         <tr>
             <th>Hotel Name</th>
             <th>score</th>
@@ -17,27 +40,85 @@
         </tr>
         {% for row in results %}
         <tr>
-            <td>{{row[0]}}</td>
-            <td>{{row[1]}}</td>
-            <td>{{row[2]}}</td>
-            <td>{{row[3]}}</td>
+            <td align="left">{{row[0]}}</td>
+            <td align="center">{{row[1]}}</td>
+            <td align="center">{{row[2]}}</td>
+            <td align="center">{{row[3]}}</td>
         </tr>
         {% endfor %}
+
     </table>
+    <form action='/reviews' method='POST'>
+        <p>
+            <h2>Select a hotel to read reviews?</h2>
+            <select name="hotel_url">
+                {% for r in results %}
+                <ul>
+                    <option value='{{r[4]}}'>{{r[0]}}</option>
+                </ul>
+                {% endfor %}
+    
+            </select>
+        </p>
+    
+        <input type='submit' value='Get reviews'/>
+
+    </form>
+    {% if plot_div %}
     <h1>Here is your graph!</h1>
     {{plot_div | safe}}
+    {% endif %}
+
+    {% if weather_plot %}
+    <h1>Today's weekly weather forecast in <b>{{city}}</b> are...</h1>
+    <table id="t01" style="width:70%">
+        <tbody>
+        <tr>
+            <th>Time</th>
+            <th>Comment</th>
+            <th>Precipitation</th>
+            <th>Humidity</th>
+            <th>UV Index</th>
+            <th>Daily summary</th>
+        </tr>
+        {% for t in range(8) %}
+        <tr>
+            <td>{{weather['wk_time'][t]}}</td>
+            <td>{{weather['comment'][t]}}</td>
+            <td>{{weather['precipitation_prob'][t]}}</td>
+            <td>{{weather['humid'][t]}}</td>
+            <td>{{weather['uv_index'][t]}}</td>
+            <td>{{weather['daily_sum'][t]}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
 
     {% if topic %}
-    <h2>Today's {{sort}} Topics of {{title}} in Reddit are...</h2>
-        
+    <h2>Today's {{sort}} Topics of <b>{{title}}</b> in Reddit are...</h2>
+
         <ol>
             {% for t in topic %}
             <li>{{ t[0] }}</li>
             {% endfor %}
         </ol>
     {% endif %}
-        
 
+    {% if weather_plot %}
+        <h1>Here is your weather graph in <b>{{city}}</b>!</h1>
+        {{weather_div_1 | safe}}
+        {{weather_div_2 | safe}}
+        {% endif %}
+
+    {% if weatherbit %}
+        <h2>No weather data available in <b>{{city}}</b></h2>
+    {% endif %}
+    <p>Get another new search: 
+        <a href="http://127.0.0.1:5000/">Search again</a></p>
+    <p>Get another new search by select: 
+        <a href="http://127.0.0.1:5000/select">Search by Select</a></p>
 
 </body>
 </html>

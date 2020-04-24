@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF8"/>
     <title>Hotel list</title>
+    <style>
+    h1, body {
+        font-family: "Karma", sans-serif
+    }
+</style>
 </head>
 <body>
     <h1>Some hotel recomendation!</h1>
@@ -26,18 +31,14 @@
 
     <p>
         What is the country you want to search? <input name="country_name" type="text"/><br/><br/><br/>
-        What is the city you want to search? <input name="city_name" type="text"/><br/><br/><br/>
+        What is the city you want to search? <input name="city_name" type="text"/><br/><br/>
     </p>
-    <!-- <p>
-    Sort by: <br/>
-        <input type='radio' name='sort' 
-                value='score' checked='checked'/> Score <br/>
-        <input type='radio' name='sort' 
-                value='review_num'/> Review number <br/><br/><br/>
-    </p> -->
+    <p><a href=http://127.0.0.1:5000/select>
+        You can also select by the radio button and drop-down list. </a><br/><br/>
+    </p>
 
     <p>
-        <input type="checkbox" name="plot"> Plot results? <br/><br/><br/>
+        <input type="checkbox" name="plot"> Hotel Plot results? <br/><br/><br/>
     </p>
 
     <p>
@@ -53,6 +54,9 @@
                 value='hot'/>hot 5<br/>
         </li>
             </ul>
+    <p>
+        <input type="checkbox" name="weather"> Weather plot results? <br/>
+    </p>
 
     <input type='submit' value='Get Results'/>
     </form>

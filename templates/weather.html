@@ -28,7 +28,10 @@ tr:nth-child(even) {
 Today's weekly weather forecast are...
 
 <body>
-
+{% if not chart %}
+<p>No content!</p>
+{% endif %}
+{% if chart %}
 <table style="width:80%">
     <tbody>
     <tr>
@@ -55,7 +58,7 @@ Today's weekly weather forecast are...
     {% endfor %}
     </tbody>
 </table>
-
+{% endif %}
 
 </body>
 

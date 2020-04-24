@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Hotel: Results</title>
+</head>
+<style>
+    h1, body {
+        font-family: "Karma", sans-serif
+    }
+    table#t01, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    img {
+        width: 100%; 
+    }
+    th,td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+
+</style>
+
+<body>
+
+    <h2>Hotel Reviews ...</h2>
+
+        <ol>
+            {% for r in results %}
+            <li>{{ r }}</li></br>
+            {% endfor %}
+        </ol>
+
+
+    </table>  
+
+    <p>Get new search: <a href="http://127.0.0.1:5000/">Search again</a></p>
+    <p>Get new search by select: <a href="http://127.0.0.1:5000/select">Search by Select</a></p>
+
+</body>
+</html>

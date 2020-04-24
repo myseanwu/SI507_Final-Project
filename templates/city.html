@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Country: Results</title>
+</head>
+
+<body>
+    <form action='/results' method='POST'>
+    <h1>Here are your city results in <b>{{country}}</b>!</h1>
+        <select name="city_name">
+            {% for c in city %}
+           
+            <option value='{{c}}'>{{c}}</option>
+            
+            {% endfor %}
+        </select>
+
+    
+
+    <p>
+        <input type="checkbox" name="plot"> Plot results? <br/><br/><br/>
+    </p>
+
+    <p>
+        <input type="checkbox" name="reddit"> Read Reddit Topics? <br/>
+    </p>
+    <ul><li>
+        How many topics do you want to read? <br/>
+            <input type='radio' name='reddit_sort'
+                value='top' checked='checked'/>Top 5<br/>
+            <input type='radio' name='reddit_sort'
+                value='new'/>Latest 5<br/>
+            <input type='radio' name='reddit_sort'
+                value='hot'/>hot 5<br/>
+        </li>
+            </ul>
+    <p>
+        <input type="checkbox" name="weather"> Weather plot results? <br/>
+    </p>
+
+    <input type='submit' value='Get Results'/>
+
+
+    </form>
+    
+
+</body>
+</html>

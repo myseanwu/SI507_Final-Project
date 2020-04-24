@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Country: Results</title>
+</head>
+<style>
+    h1, body {
+        font-family: "Karma", sans-serif
+    }
+    table#t01, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    img {
+        width: 100%; 
+    }
+    th,td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+
+</style>
+
+<body>
+    <h1>Here are countries in <b>{{region}}</b>!</h1>
+    <form action='/city' method='POST'>
+
+    <ol>
+        {% for c in countries %}
+        
+            <li><input type='radio' name='country_name' value='{{c}}' checked='checked'/>{{c}}</li>
+        
+        {% endfor %}
+    </ol>
+    
+    <input type='submit' value='Get City'/>
+    </form>
+
+
+    
+</body>
+</html>
