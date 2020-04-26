@@ -43,10 +43,10 @@ def reddit_topics(topic,num,sorting='top'):
     i=1
     for x in search:
         num = f'[{i}]'
-        topic = x.title.strip('\n')
-        pic = x.url
+        topic = x.title.strip()
+        # pic = x.url
         i = i + 1
-        result[num] = (topic,pic)
+        result[num] = (topic)
     return result
 
 
@@ -349,8 +349,14 @@ def read_review(hotel_url_list,num):
     if num.isnumeric() and int(num) >0 and int(num)<=len(hotel_url_list):
         url = hotel_url_list[int(num)-1][4]
         r =hotel_review(url)
+        print(f'\nHOTEL reviews of "{hotel_url_list[int(num)-1][0]}":')
+        i = 1
         for l in r:
-            print(l,'\n')
+            text = repr(l)
+            text = re.sub(r'\\r',' ',text)
+            print(f'[{i}] {text}')
+            i += 1
+        print()
         return r # list
     else:
         print('Invalid input!')
@@ -517,19 +523,20 @@ def hotel_interactive(): # put this in main
 
         data = hotel_info_from_browse_list(browse_url) #use browse url to scrape hotel list
         # return list of hotel_name, score, comment_title, review_num, url
+        print(f'--------HOTELs in {selected_city}--------')
         print_hotel_data(data) # print: hotel_name, score, comment_title, review_num
 
         # select hotel
         while True:
             n = input('Select a hotel number to read reviews or type "topic" to read Reddit topics: ')
             if n.isnumeric() and int(n) >0 and int(n)<=len(data):
-                print('\n')
+                # print('\n')
                 read_review(data,n)
                 continue
             elif n == 'exit':
                 exit()
             elif n == 'topic':
-                print('\n')
+                # print('\n')
                 break
             else:
                 print('Invalid Input!')
@@ -604,10 +611,11 @@ if __name__=="__main__":
         print(f'Top5 topics of {country} in Reddit :')
         result = reddit_topics(country,5) # top 5
         for k,v in result.items():
-            print(k,v[0])
+            print(k,v)
     else:
         for k,v in result.items():
-            print(k,v[0])
+            print(k,v)
+    print()
 
     # choose to read weather
     while True:
@@ -615,6 +623,7 @@ if __name__=="__main__":
         if n == 'exit':
             exit()
         elif n == 'weather':
+            print('Weakly weather forecast:')
             try: # weather (obj of darksky api)
                 try:  # weather obj: if city no result, use country
                     obj = darksky_api.weather_data(city)
@@ -630,6 +639,7 @@ if __name__=="__main__":
                 fig.show()
                 fig2 = obj.plot_precip_line()
                 fig2.show()
+                break # after show graphs, break
 
             except: # weatherbit (obj of weatherbit api)
                 try:

@@ -34,7 +34,7 @@ def results():
 
 
     info = list_city_url(selected_region,selected_country,selected_city) # city url from sql
-    print(info)
+    # print(info)
 
     try:
         city_url = info[3] # retreive browse url
@@ -64,9 +64,9 @@ def results():
         search_title = ''
 
     ## weather
-    print(selected_city)
+    # print(seleccted_city)
     weather_or_not = request.form.get('weather', False)
-
+    no_weatherbit = False
     # darksky api
     try:
         try: # if mapbox no data, search country location
@@ -83,6 +83,7 @@ def results():
         except:
             weather_or_not = False
             no_weatherbit = True
+            
     
     if weather_or_not:
         weather_table = obj.total
