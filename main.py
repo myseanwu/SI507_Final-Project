@@ -559,7 +559,7 @@ def check_tables_sql():
     if 'city_url' in find and 'Regions' in find:
         print('TABLE EXISTS!')
     else:
-        print('Creat Database....now...')
+        print('Create Database....now...')
         create_city_url_db()
     conn.close()
 

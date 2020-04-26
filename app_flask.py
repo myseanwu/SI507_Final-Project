@@ -3,11 +3,16 @@ import sqlite3
 import plotly.graph_objects as go
 from main import list_city_url
 from main import go_to_hotels_browse, hotel_info_from_browse_list, reddit_topics, hotel_review
+from main import check_tables_sql, load_cache
 import re
 from darksky_api import weather_data, weatherbit_data
 from main import list_region_to_select, list_country_by_region,list_city_by_country
 
 app = Flask(__name__)
+
+CACHE_FILE_NAME = 'cache.json'  ## cache
+CACHE_DICT = {}  ## cache
+
 
 class Location():
     region = ''
@@ -186,6 +191,9 @@ def city():
 
 
 if __name__ == '__main__':
+    CACHE_DICT = load_cache()
+    check_tables_sql()
+
     app.run(debug=True)
 
 
