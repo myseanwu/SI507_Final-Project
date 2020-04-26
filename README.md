@@ -29,7 +29,7 @@ Also, users could look up the forecasted weather with the trending graph for the
 ## Required Python packages for this project to work (e.g., requests, flask)
 * PRAW, datetime, requests, BeautifulSoup, sqlite3, re, flask, plotly, pytz
 
-## Brief description of how to interact with your program
+## Brief description of how to interact with the program
 * Running main.py file, users will have the interaction in the terminal with command line prompt, asking users to type selections step by step. 
 * Running app_flask.py file, the program will generate a Flask web application running on http://127.0.0.1:5000/.
 Either feeding the form by typing country and city name or selecting them by drop-down options, 
