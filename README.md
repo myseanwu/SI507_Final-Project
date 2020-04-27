@@ -7,23 +7,23 @@ Also, users could look up the forecasted weather with the trending graph for the
 
 
 #### Reddit API keys:
-* Client_id, client_secret, user_agent, username, password
+* Client_id, client_secret, user_agent, username, password (in main.py)
   ##### Create an app in Reddit to get these OAuth2 keys to access the API
 * Use PRAW,the Python Reddit API Wrapper, to connect API
   ##### Reference: https://github.com/reddit-archive/reddit/wiki/oauth2
   ##### Reference: https://praw.readthedocs.io/en/latest/getting_started/quick_start.html
 
 #### Mapbox api_key:
-* Client_key
+* Client_key (in darksky_api.py)
 * Reference: https://docs.mapbox.com/api/accounts/#tokens
 
 #### Darksky api key:
-* API key
+* API key (in darksky_api.py)
 * Reference: https://darksky.net/dev/docs#data-block-object
 * Note: Darksky API service will no longer accept new signups since 3/31 2020.
 
 #### Weatherbit api key: (alternative to Darksky api)
-* API key
+* API key (in darksky_api.py)
 * Reference: https://www.weatherbit.io/api/weather-forecast-16-day
 
 ## Required Python packages for this project to work (e.g., requests, flask)
