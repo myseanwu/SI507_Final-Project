@@ -657,6 +657,7 @@ if __name__=="__main__":
                     fig.show()
                     fig2 = obj.plot_precip_line()
                     fig2.show()
+                    break # after show graphs, break
                 except:
                     print('No content in weatherbid!')
 

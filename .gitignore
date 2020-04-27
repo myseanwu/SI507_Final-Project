@@ -4,6 +4,6 @@ __pycache__
 secrets.py
 cache.json
 city.json
-hotelbooking.sqlite
+
 
 .DS_Store

@@ -50,6 +50,8 @@ def results():
         search = re.match(pattern,browse_url)
         if search:
             results = hotel_info_from_browse_list(browse_url)
+        else:
+            results = [('N/A','N/A','N/A','N/A','N/A')]
 
     except:
         results = [('N/A','N/A','N/A','N/A','N/A')]
