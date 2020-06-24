@@ -36,5 +36,6 @@ Either feeding the form by typing country and city name or selecting them by dro
 the program will then generate the hotel information. 
 Also, there are some options related to the selected city that users could choose, which are Reddit topic search and weather information.
 
-
+## Demo & explain:
+* https://www.loom.com/share/e4646eb7dd004652ba6d1dbb758832ef
 
